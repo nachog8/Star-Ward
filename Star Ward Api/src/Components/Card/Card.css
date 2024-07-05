@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 20px; 
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+}
+  
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 10px;
+    margin: 5px 20px;
+    background-color: #181818; /* Fondo negro */
+    color: white; /* Texto blanco */
+}
+
+.card-btn {
+    background-color: #e9d825; /* Fondo amarillo */
+    color: black; /* Texto negro para contraste */
+    border: none; /* Opcional: elimina el borde del botón */
+    padding: 10px; /* Opcional: agrega padding para tamaño */
+    border-radius: 5px; /* Opcional: bordes redondeados */
+}
+
+.card-btn:hover {
+    background-color: #fae959;
+    color: black;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}

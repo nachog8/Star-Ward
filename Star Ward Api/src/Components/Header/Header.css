@@ -1,0 +1,23 @@
+header {
+    background-color: transparent;
+}
+
+.search-input {
+    background-color: #181818 !important; /* Color de fondo del campo de búsqueda */
+    border-color: #181818 !important; /* Color del borde del campo de búsqueda */
+    color: white !important; /* Color del texto del campo de búsqueda */
+}
+
+.search-input::placeholder { /* Selector para el texto del placeholder */
+    color: white !important; /* Establece el color del texto del placeholder a blanco */
+    opacity: 1 !important; /* Asegura que el placeholder tenga opacidad completa */
+}
+
+.search-input:focus, .search-input:active {
+    box-shadow: 0 0 0 0.1rem rgba(233, 216, 37, 0.5) !important; /* Sombra amarilla */
+    outline: none !important;
+}
+
+.search-input::-webkit-search-cancel-button {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}

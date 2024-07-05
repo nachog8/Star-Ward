@@ -1,0 +1,17 @@
+/* Cambia el color de fondo de todos los enlaces del paginador */
+.pagination-item .page-link {
+    background-color: #181818 !important; /* Color de fondo */
+    color: white !important; /* Color del texto */
+    border: 1px solid #e9d825 !important; /* Borde, opcional */
+}
+
+/* Cambia el color de fondo del enlace activo/seleccionado */
+.pagination-item.active .page-link {
+    background-color: #e9d825 !important; /* Color de fondo para el enlace activo */
+    color: black !important; /* Color del texto para el enlace activo */
+}
+
+.pagination-item .page-link:focus, .pagination-item .page-link:active {
+    box-shadow: 0 0 0 0.1rem rgba(233, 216, 37, 0.5) !important; /* Sombra amarilla */
+    outline: none !important;
+}
