@@ -23,25 +23,13 @@
     color: white; /* Texto blanco */
 }
 
-.card-btn {
-    background-color: #e9d825; /* Fondo amarillo */
-    color: black; /* Texto negro para contraste */
-    border: none; /* Opcional: elimina el borde del botón */
-    padding: 10px; /* Opcional: agrega padding para tamaño */
-    border-radius: 5px; /* Opcional: bordes redondeados */
-}
-
-.card-btn:hover {
-    background-color: #fae959;
-    color: black;
-}
-
 .row{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     width: 100%;
+    flex-wrap: nowrap;
 }
 
 .error{

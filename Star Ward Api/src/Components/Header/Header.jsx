@@ -36,7 +36,7 @@ function NavScrollExample({ onSearch }) {
               aria-label="Search"
               onChange={(e) => onSearch(e.target.value)}
             />
-            <Button variant="outline-success" className="card-btn">
+            <Button variant="outline-success" className="header-btn">
               Buscar
             </Button>
           </Form>

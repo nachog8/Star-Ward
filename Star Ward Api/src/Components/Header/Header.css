@@ -21,3 +21,20 @@ header {
 .search-input::-webkit-search-cancel-button {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
+
+.header-btn {
+    background-color: #e9d825;
+    color: black; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 5px; 
+}
+
+.header-btn:hover {
+    background-color: #fae959;
+    color: black;
+}
+.header-btn:active {
+    background-color: #fae959 !important;
+    color: black !important;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Container, Row, Col } from "react-bootstrap";
+import { Modal, Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Modal.css";
 
@@ -65,7 +65,9 @@ function CharacterModal({ show, handleClose, character }) {
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>{character.name}</Modal.Title>
+        <Modal.Title className="titulos-principales">
+          {character.name}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Container>
@@ -74,10 +76,10 @@ function CharacterModal({ show, handleClose, character }) {
               <img
                 src={`${BASE_IMAGE_URL}characters/${characterId}.jpg`}
                 alt={`Imagen de ${character.name}`}
-                style={{ width: "100%" }}
+                className="character-image"
               />
             </Col>
-            <Col md={8}>
+            <Col md={8} className="character-details">
               <p>
                 <strong>Birth Year:</strong> {character.birth_year}
               </p>
@@ -116,7 +118,7 @@ function CharacterModal({ show, handleClose, character }) {
           </Row>
           <Row>
             <Col md={12} className="container-films">
-              <h5>Related Films</h5>
+              <h5 className="titulos-principales">Related Films</h5>
               <ul>
                 {films.map((film, index) => (
                   <li key={index}>
@@ -139,7 +141,7 @@ function CharacterModal({ show, handleClose, character }) {
           </Row>
           <Row>
             <Col md={12}>
-              <h5>Related Vehicles</h5>
+              <h5 className="titulos-principales">Related Vehicles</h5>
               <ul>
                 {vehicles.map((vehicle, index) => (
                   <li key={index}>
@@ -158,12 +160,12 @@ function CharacterModal({ show, handleClose, character }) {
           </Row>
           <Row>
             <Col md={12}>
-              <h5>Related Starships</h5>
+              <h5 className="titulos-principales">Related Starships</h5>
               <ul>
                 {starships.map((starship, index) => (
                   <li key={index}>
                     <img
-                      className="imagenes vehicles"
+                      className="imagenes"
                       src={`${BASE_IMAGE_URL}starships/${
                         starship.url.match(/\/([0-9]*)\/$/)[1]
                       }.jpg`}
