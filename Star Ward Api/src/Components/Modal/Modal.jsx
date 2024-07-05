@@ -38,17 +38,18 @@ function CharacterModal({ show, handleClose, character }) {
 
     const getStarshipId = (url) => {
       const id = url.match(/\/([0-9]*)\/$/)[1];
-      return id;
+      return `starships/${id}`;
+    };
+
+    const getFilmId = (url) => {
+      const id = url.match(/\/([0-9]*)\/$/)[1];
+      return `films/${id}`;
     };
 
     if (character) {
       fetchVehicles();
       fetchStarships();
-      fetchData(
-        character.films,
-        setFilms,
-        (url) => url.match(/\/([0-9]*)\/$/)[1]
-      );
+      fetchData(character.films, setFilms, getFilmId);
     }
   }, [character]);
 
@@ -125,10 +126,11 @@ function CharacterModal({ show, handleClose, character }) {
                       rel="noopener noreferrer"
                     >
                       <img
-                        className="imagenes-films"
+                        className="imagenes"
                         src={`${BASE_IMAGE_URL}films/${film.episode_id}.jpg`}
                         alt={film.title}
                       />
+                      <p className="title">{film.title}</p>
                     </a>
                   </li>
                 ))}
@@ -142,9 +144,13 @@ function CharacterModal({ show, handleClose, character }) {
                 {vehicles.map((vehicle, index) => (
                   <li key={index}>
                     <img
-                      src={`${BASE_IMAGE_URL}${vehicle.url}.jpg`}
+                      className="imagenes"
+                      src={`${BASE_IMAGE_URL}vehicles/${
+                        vehicle.url.match(/\/([0-9]*)\/$/)[1]
+                      }.jpg`}
                       alt={vehicle.name}
                     />
+                    <p className="title">{vehicle.name}</p>
                   </li>
                 ))}
               </ul>
@@ -157,9 +163,13 @@ function CharacterModal({ show, handleClose, character }) {
                 {starships.map((starship, index) => (
                   <li key={index}>
                     <img
-                      src={`${BASE_IMAGE_URL}${starship.url}.jpg`}
+                      className="imagenes vehicles"
+                      src={`${BASE_IMAGE_URL}starships/${
+                        starship.url.match(/\/([0-9]*)\/$/)[1]
+                      }.jpg`}
                       alt={starship.name}
                     />
+                    <p className="title">{starship.name}</p>
                   </li>
                 ))}
               </ul>
@@ -167,11 +177,6 @@ function CharacterModal({ show, handleClose, character }) {
           </Row>
         </Container>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }
