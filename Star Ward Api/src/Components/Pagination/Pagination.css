@@ -15,3 +15,27 @@
     box-shadow: 0 0 0 0.1rem rgba(233, 216, 37, 0.5) !important; /* Sombra amarilla */
     outline: none !important;
 }
+
+/* Centra el contenedor de la paginación */
+.pagination-container {
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  margin-top: 20px; /* Añade un margen superior, ajusta según sea necesario */
+}
+
+/* Asegúrate de que los elementos de paginación se muestren en línea */
+.pagination {
+  display: flex;
+  list-style: none; /* Elimina los estilos de lista predeterminados */
+  padding: 0; /* Elimina el padding predeterminado */
+}
+
+.pagination-item {
+  margin: 0 5px; /* Añade un pequeño margen entre los elementos de paginación */
+  cursor: pointer; /* Cambia el cursor a pointer para indicar que es clickeable */
+}
+
+/* Estilos adicionales para el elemento activo, si es necesario */
+.pagination-item.active {
+  font-weight: bold; /* Hace el número de página actual más bold */
+}

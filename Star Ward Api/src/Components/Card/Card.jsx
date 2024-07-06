@@ -64,7 +64,7 @@ function StarWarsCards({ searchTerm }) {
             {displayedCharacters.slice(0, 5).map((character) => {
               const characterId = getCharacterId(character.url);
               return (
-                <Col key={characterId} md={2}>
+                <Col key={characterId} md={2} className="custom-card">
                   <Card
                     style={{
                       width: "18rem",
@@ -79,7 +79,9 @@ function StarWarsCards({ searchTerm }) {
                       alt={`Imagen de ${character.name}`}
                     />
                     <Card.Body>
-                      <Card.Title>{character.name}</Card.Title>
+                      <Card.Title className="nombre">
+                        {character.name}
+                      </Card.Title>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -101,7 +103,9 @@ function StarWarsCards({ searchTerm }) {
                       alt={`Imagen de ${character.name}`}
                     />
                     <Card.Body>
-                      <Card.Title>{character.name}</Card.Title>
+                      <Card.Title className="nombre">
+                        {character.name}
+                      </Card.Title>
                     </Card.Body>
                   </Card>
                 </Col>

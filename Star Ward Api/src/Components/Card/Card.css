@@ -37,3 +37,13 @@
     border-color: #e9d825 !important;
     color: white;
 }
+
+.custom-card{
+    cursor: pointer;
+}
+
+.nombre{
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Noto Sans Cham', sans-serif;
+}

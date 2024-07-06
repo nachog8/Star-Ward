@@ -1,9 +1,10 @@
 @import url('https://fonts.cdnfonts.com/css/star-wars');
-@import url('https://db.onlinewebfonts.com/c/0c724f6aa457310440cf8949c615cbd7?family=Star+Jedi+V2');                    
+@import url('https://db.onlinewebfonts.com/c/0c724f6aa457310440cf8949c615cbd7?family=Star+Jedi+V2');       
+@import url('https://fonts.cdnfonts.com/css/noto-sans-cham-5');
 
 body {
   background-color: #f8f9fa;
-  font-family: "Star jedi",arial;
+  font-family: 'Noto Sans Cham', sans-serif;
 }
 
 .App {

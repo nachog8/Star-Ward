@@ -1,0 +1,29 @@
+@import url('https://fonts.cdnfonts.com/css/starjedi-special-edition');
+
+.footer {
+  color: #fff; /* Color del texto */
+  text-align: center; /* Alinea el texto al centro */
+  justify-content: space-around;
+  padding: 20px 0; /* Espaciado interno */
+  margin-top: 20px; /* Espacio por encima del footer */
+}
+
+.social-media-links {
+  margin: 10px 0; /* Espaciado vertical para los enlaces */
+}
+
+.social-media-links a {
+  color: #fff; /* Color de los enlaces */
+  margin: 0 10px; /* Espaciado horizontal entre iconos */
+  font-size: 24px; /* Tamaño de los iconos */
+}
+
+.social-media-links a:hover {
+  color: #ddd; /* Color de los enlaces al pasar el mouse */
+}
+
+.copyright {
+  margin-top: 10px; /* Espaciado por encima del texto de derechos de autor */
+  font-size: 14px; /* Tamaño del texto */
+  font-family: 'Star Jedi', sans-serif;
+}
