@@ -152,7 +152,7 @@ function CharacterModal({ show, handleClose, character }) {
           </Row>
           <Row>
             <Col md={12}>
-              <h5 className="titulos-principales">Related Vehicles</h5>
+              <h5 className="titulos-principales">Related vehicles</h5>
               {vehicles.length > 0 ? (
                 <ul>
                   {vehicles.map((vehicle, index) => (

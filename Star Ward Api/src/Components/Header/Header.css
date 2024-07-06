@@ -2,6 +2,53 @@ header {
     background-color: transparent;
 }
 
+.header-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block; 
+    position: relative;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    font-family: "Star Jedi V2";
+}
+
+.header-link:hover {
+    color: #e9d825;
+    opacity: 1;
+}
+
+.header-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; 
+    bottom: 0;
+    left: 0;
+    background-color: #e9d825;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.header-link:hover::after {
+    visibility: visible;
+    width: 100%;
+}
+
+.header-link.active {
+    color: #e9d825 !important; /* Asegura que el texto sea amarillo */
+}
+
+.header-link.active::after {
+    content: '';
+    position: absolute;
+    width: 100%; /* El subrayado cubre todo el ancho */
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #e9d825; /* Color del subrayado */
+    visibility: visible; /* Asegura que el subrayado sea visible */
+}
+
 .search-input {
     background-color: #181818 !important; /* Color de fondo del campo de búsqueda */
     border-color: #181818 !important; /* Color del borde del campo de búsqueda */

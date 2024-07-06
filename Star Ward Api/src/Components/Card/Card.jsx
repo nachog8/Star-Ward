@@ -1,45 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Card, Alert } from "react-bootstrap";
 import PaginationComponent from "../Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Card.css";
 
-function StarWarsCards({ searchTerm }) {
-  const [characters, setCharacters] = useState([]);
+function StarWarsCards({ characters, searchTerm }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const response = await fetch(
-          `https://swapi.dev/api/people/?page=${currentPage}`
-        );
-        const data = await response.json();
-        setCharacters(data.results);
-        setTotalPages(Math.ceil(data.count / 10));
-      } catch (error) {
-        console.error("Error al obtener los personajes ", error);
-      }
-    };
-
-    fetchCharacters();
-  }, [currentPage]);
+  const itemsPerPage = 10;
 
   const getCharacterId = (url) => {
     const id = url.match(/\/([0-9]*)\/$/)[1];
     return id;
   };
-
-  const filteredCharacters = characters.filter((character) =>
-    character.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Limitar a 10 personajes para mostrar en 2 filas de 5 columnas
-  const displayedCharacters = filteredCharacters.slice(0, 10);
 
   const handleShowModal = (character) => {
     setSelectedCharacter(character);
@@ -51,6 +26,24 @@ function StarWarsCards({ searchTerm }) {
     setSelectedCharacter(null);
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Reset to first page when searchTerm changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  const filteredCharacters = characters.filter((character) =>
+    character.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const paginatedCharacters = filteredCharacters.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <Container>
       {filteredCharacters.length === 0 ? (
@@ -60,10 +53,10 @@ function StarWarsCards({ searchTerm }) {
       ) : (
         <>
           <Row>
-            {displayedCharacters.slice(0, 5).map((character) => {
+            {paginatedCharacters.slice(0, 5).map((character, index) => {
               const characterId = getCharacterId(character.url);
               return (
-                <Col key={characterId} md={2} className="custom-card">
+                <Col key={index} md={2} className="custom-card">
                   <Card
                     style={{
                       width: "18rem",
@@ -88,12 +81,16 @@ function StarWarsCards({ searchTerm }) {
             })}
           </Row>
           <Row>
-            {displayedCharacters.slice(5, 10).map((character) => {
+            {paginatedCharacters.slice(5, 10).map((character, index) => {
               const characterId = getCharacterId(character.url);
               return (
-                <Col key={characterId} md={2}>
+                <Col key={index} md={2} className="custom-card">
                   <Card
-                    style={{ width: "100%", marginBottom: "20px" }}
+                    style={{
+                      width: "18rem",
+                      maxWidth: "100%",
+                      marginBottom: "20px",
+                    }}
                     onClick={() => handleShowModal(character)}
                   >
                     <Card.Img
@@ -117,8 +114,8 @@ function StarWarsCards({ searchTerm }) {
         <Col className="d-flex justify-content-center">
           <PaginationComponent
             currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
+            totalPages={Math.ceil(filteredCharacters.length / itemsPerPage)}
+            onPageChange={handlePageChange}
           />
         </Col>
       </Row>

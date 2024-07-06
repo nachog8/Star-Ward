@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -9,6 +9,32 @@ import "./Header.css";
 import logo from "../../assets/img/logo.jpg";
 
 function NavScrollExample({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCharacters, setActiveCharacters] = useState(true);
+  const [activeStarships, setActiveStarships] = useState(false);
+  const [activeFilms, setActiveFilms] = useState(false);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    onSearch(e.target.value);
+  };
+
+  const handleLinkClick = (linkName) => {
+    if (linkName === "Characters") {
+      setActiveCharacters(true);
+      setActiveStarships(false);
+      setActiveFilms(false);
+    } else if (linkName === "Starships") {
+      setActiveCharacters(false);
+      setActiveStarships(true);
+      setActiveFilms(false);
+    } else if (linkName === "Films") {
+      setActiveCharacters(false);
+      setActiveStarships(false);
+      setActiveFilms(true);
+    }
+  };
+
   return (
     <Navbar expand="lg">
       <Container fluid className="navbar-container">
@@ -28,24 +54,27 @@ function NavScrollExample({ onSearch }) {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            {/* <Button
-              variant="outline-success"
-              className="header-btn mx-2 clases"
+            <Nav.Link
+              href="#"
+              className={`header-link ${activeCharacters ? "active" : ""}`}
+              onClick={() => handleLinkClick("Characters")}
             >
-              Personajes
-            </Button>
-            <Button
-              variant="outline-success"
-              className="header-btn mx-2 clases"
+              Characters
+            </Nav.Link>
+            <Nav.Link
+              href="#"
+              className={`header-link ${activeStarships ? "active" : ""}`}
+              onClick={() => handleLinkClick("Starships")}
             >
-              Naves Espaciales
-            </Button>
-            <Button
-              variant="outline-success"
-              className="header-btn mx-2 clases"
+              Starships
+            </Nav.Link>
+            <Nav.Link
+              href="#"
+              className={`header-link ${activeFilms ? "active" : ""}`}
+              onClick={() => handleLinkClick("Films")}
             >
-              vehículos
-            </Button> */}
+              Films
+            </Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
@@ -53,7 +82,8 @@ function NavScrollExample({ onSearch }) {
               placeholder="Buscar Personajes"
               className="me-2 search-input"
               aria-label="Search"
-              onChange={(e) => onSearch(e.target.value)}
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
             <Button variant="outline-success" className="header-btn">
               Buscar
