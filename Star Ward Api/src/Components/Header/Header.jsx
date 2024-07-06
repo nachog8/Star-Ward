@@ -11,12 +11,12 @@ import logo from "../../assets/img/logo.jpg";
 function NavScrollExample({ onSearch }) {
   return (
     <Navbar expand="lg">
-      <Container fluid>
+      <Container fluid className="navbar-container">
         <Navbar.Brand href="#">
           <img
             src={logo}
-            width="100" // Ajusta el ancho como sea necesario
-            height="50" // Ajusta la altura como sea necesario
+            width="100"
+            height="50"
             className="d-inline-block align-top"
             alt="Logo Star Wars"
           />
@@ -27,7 +27,26 @@ function NavScrollExample({ onSearch }) {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
-          ></Nav>
+          >
+            {/* <Button
+              variant="outline-success"
+              className="header-btn mx-2 clases"
+            >
+              Personajes
+            </Button>
+            <Button
+              variant="outline-success"
+              className="header-btn mx-2 clases"
+            >
+              Naves Espaciales
+            </Button>
+            <Button
+              variant="outline-success"
+              className="header-btn mx-2 clases"
+            >
+              vehículos
+            </Button> */}
+          </Nav>
           <Form className="d-flex">
             <Form.Control
               type="search"

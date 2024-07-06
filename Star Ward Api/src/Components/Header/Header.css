@@ -38,3 +38,9 @@ header {
     background-color: #fae959 !important;
     color: black !important;
 }
+
+.navbar-container{
+    padding: 10px 15px 20px 15px;
+    justify-content: space-around;
+}
+

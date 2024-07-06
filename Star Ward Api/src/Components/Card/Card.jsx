@@ -1,4 +1,3 @@
-// src/Components/Card/Card.jsx
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
 import PaginationComponent from "../Pagination/Pagination";
