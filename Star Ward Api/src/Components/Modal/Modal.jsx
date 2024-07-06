@@ -10,6 +10,8 @@ function CharacterModal({ show, handleClose, character }) {
   const [films, setFilms] = useState([]);
   const [vehicles, setVehicles] = useState([]);
   const [starships, setStarships] = useState([]);
+  const [homeworld, setHomeworld] = useState("");
+  const [species, setSpecies] = useState("Human");
 
   useEffect(() => {
     const fetchData = async (urls, setData, getIdFunction) => {
@@ -31,6 +33,22 @@ function CharacterModal({ show, handleClose, character }) {
       fetchData(character.starships, setStarships, getStarshipId);
     };
 
+    const fetchHomeworld = async () => {
+      if (character.homeworld) {
+        const response = await fetch(character.homeworld);
+        const data = await response.json();
+        setHomeworld(data.name);
+      }
+    };
+
+    const fetchSpecies = async () => {
+      if (character.species && character.species.length > 0) {
+        const response = await fetch(character.species[0]);
+        const data = await response.json();
+        setSpecies(data.name);
+      }
+    };
+
     const getVehicleId = (url) => {
       const id = url.match(/\/([0-9]*)\/$/)[1];
       return `vehicles/${id}`;
@@ -49,6 +67,8 @@ function CharacterModal({ show, handleClose, character }) {
     if (character) {
       fetchVehicles();
       fetchStarships();
+      fetchHomeworld();
+      fetchSpecies();
       fetchData(character.films, setFilms, getFilmId);
     }
   }, [character]);
@@ -64,12 +84,12 @@ function CharacterModal({ show, handleClose, character }) {
 
   return (
     <Modal show={show} onHide={handleClose} size="lg">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className="container-modal">
         <Modal.Title className="titulos-principales">
           {character.name}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="container-modal">
         <Container>
           <Row>
             <Col md={4}>
@@ -84,7 +104,7 @@ function CharacterModal({ show, handleClose, character }) {
                 <strong>Birth Year:</strong> {character.birth_year}
               </p>
               <p>
-                <strong>Species:</strong> {character.species}
+                <strong>Species:</strong> {species}
               </p>
               <p>
                 <strong>Height:</strong> {character.height} cm
@@ -105,76 +125,75 @@ function CharacterModal({ show, handleClose, character }) {
                 <strong>Eye Color:</strong> {character.eye_color}
               </p>
               <p>
-                <strong>Homeworld:</strong>{" "}
-                <a
-                  href={character.homeworld}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {character.homeworld}
-                </a>
+                <strong>Homeworld:</strong> {homeworld}
               </p>
             </Col>
           </Row>
           <Row>
             <Col md={12} className="container-films">
               <h5 className="titulos-principales">Related Films</h5>
-              <ul>
-                {films.map((film, index) => (
-                  <li key={index}>
-                    <a
-                      href={film.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+              {films.length > 0 ? (
+                <ul>
+                  {films.map((film, index) => (
+                    <li key={index}>
                       <img
                         className="imagenes"
                         src={`${BASE_IMAGE_URL}films/${film.episode_id}.jpg`}
                         alt={film.title}
                       />
                       <p className="title">{film.title}</p>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="respuesta-auto">No films found.</p>
+              )}
             </Col>
           </Row>
           <Row>
             <Col md={12}>
               <h5 className="titulos-principales">Related Vehicles</h5>
-              <ul>
-                {vehicles.map((vehicle, index) => (
-                  <li key={index}>
-                    <img
-                      className="imagenes"
-                      src={`${BASE_IMAGE_URL}vehicles/${
-                        vehicle.url.match(/\/([0-9]*)\/$/)[1]
-                      }.jpg`}
-                      alt={vehicle.name}
-                    />
-                    <p className="title">{vehicle.name}</p>
-                  </li>
-                ))}
-              </ul>
+              {vehicles.length > 0 ? (
+                <ul>
+                  {vehicles.map((vehicle, index) => (
+                    <li key={index}>
+                      <img
+                        className="imagenes"
+                        src={`${BASE_IMAGE_URL}vehicles/${
+                          vehicle.url.match(/\/([0-9]*)\/$/)[1]
+                        }.jpg`}
+                        alt={vehicle.name}
+                      />
+                      <p className="title">{vehicle.name}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="respuesta-auto">No vehicles found.</p>
+              )}
             </Col>
           </Row>
           <Row>
             <Col md={12}>
               <h5 className="titulos-principales">Related Starships</h5>
-              <ul>
-                {starships.map((starship, index) => (
-                  <li key={index}>
-                    <img
-                      className="imagenes"
-                      src={`${BASE_IMAGE_URL}starships/${
-                        starship.url.match(/\/([0-9]*)\/$/)[1]
-                      }.jpg`}
-                      alt={starship.name}
-                    />
-                    <p className="title">{starship.name}</p>
-                  </li>
-                ))}
-              </ul>
+              {starships.length > 0 ? (
+                <ul>
+                  {starships.map((starship, index) => (
+                    <li key={index}>
+                      <img
+                        className="imagenes"
+                        src={`${BASE_IMAGE_URL}starships/${
+                          starship.url.match(/\/([0-9]*)\/$/)[1]
+                        }.jpg`}
+                        alt={starship.name}
+                      />
+                      <p className="title">{starship.name}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="respuesta-auto">No starships found.</p>
+              )}
             </Col>
           </Row>
         </Container>
