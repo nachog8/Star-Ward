@@ -27,30 +27,58 @@ function Starships() {
           No se encontraron naves espaciales.
         </Alert>
       ) : (
-        <Row>
-          {starships.map((starship, index) => (
-            <Col key={index} md={2} className="custom-card">
-              <Card
-                style={{
-                  width: "18rem",
-                  maxWidth: "100%",
-                  marginBottom: "20px",
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={`https://starwars-visualguide.com/assets/img/starships/${
-                    starship.url.match(/\/([0-9]*)\/$/)[1]
-                  }.jpg`}
-                  alt={`Imagen de ${starship.name}`}
-                />
-                <Card.Body>
-                  <Card.Title className="nombre">{starship.name}</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        <>
+          <Row>
+            {starships.slice(0, 5).map((starship, index) => (
+              <Col key={index} md={2} className="custom-card">
+                <Card
+                  style={{
+                    width: "18rem",
+                    maxWidth: "100%",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={`https://starwars-visualguide.com/assets/img/starships/${
+                      starship.url.match(/\/([0-9]*)\/$/)[1]
+                    }.jpg`}
+                    alt={`Imagen de ${starship.name}`}
+                    className="card-img-top"
+                  />
+                  <Card.Body>
+                    <Card.Title className="nombre">{starship.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <Row>
+            {starships.slice(5, 10).map((starship, index) => (
+              <Col key={index} md={2} className="custom-card">
+                <Card
+                  style={{
+                    width: "18rem",
+                    maxWidth: "100%",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={`https://starwars-visualguide.com/assets/img/starships/${
+                      starship.url.match(/\/([0-9]*)\/$/)[1]
+                    }.jpg`}
+                    alt={`Imagen de ${starship.name}`}
+                    className="card-img-top"
+                  />
+                  <Card.Body>
+                    <Card.Title className="nombre">{starship.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </>
       )}
     </Container>
   );

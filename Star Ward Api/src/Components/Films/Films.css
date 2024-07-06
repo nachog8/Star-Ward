@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 20px; 
+}
+
+.film-img {
+    height: 400px;
+    object-fit: cover;
+}
+  
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 10px;
+    margin: 5px 20px;
+    background-color: #181818;
+    color: white;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.error {
+    background-color: #181818 !important;
+    border-color: #e9d825 !important;
+    color: white;
+}
+
+.custom-card {
+    cursor: pointer;
+}
+
+.nombre {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Noto Sans Cham', sans-serif;
+}

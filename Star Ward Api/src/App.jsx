@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import StarWarsCards from "./Components/Card/Card";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import Starships from "./Components/Starships/Starships";
+import Films from "./Components/Films/Films";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,11 +30,29 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header onSearch={setSearchTerm} />
-      <StarWarsCards characters={characters} searchTerm={searchTerm} />
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Header onSearch={setSearchTerm} />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <StarWarsCards characters={characters} searchTerm={searchTerm} />
+            }
+          />
+          <Route
+            path="/characters"
+            element={
+              <StarWarsCards characters={characters} searchTerm={searchTerm} />
+            }
+          />
+          <Route path="/starships" element={<Starships />} />
+          <Route path="/films" element={<Films />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
