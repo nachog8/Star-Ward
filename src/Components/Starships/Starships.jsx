@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Alert } from "react-bootstrap";
 import "./Starships.css";
+import noImg from "../../assets/img/noImg.jpg";
 
 const BASE_IMAGE_URL = "https://starwars-visualguide.com/assets/img/starships/";
-const DEFAULT_IMAGE_URL = "/src/assets/img/noImg.jpg"; // Ruta a la imagen por defecto
 
 function Starships({ searchTerm }) {
   const [starships, setStarships] = useState([]);
@@ -43,7 +43,7 @@ function Starships({ searchTerm }) {
                 variant="top"
                 src={
                   defaultImageStarshipIndexes.includes(index)
-                    ? DEFAULT_IMAGE_URL
+                    ? noImg
                     : `${BASE_IMAGE_URL}${
                         starship.url.match(/\/(\d+)\/$/)[1]
                       }.jpg`
