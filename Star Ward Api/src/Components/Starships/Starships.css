@@ -16,11 +16,11 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    height: 300px;
+    height: 200px;
     border-radius: 10px;
     margin: 5px 20px;
-    background-color: #181818; /* Fondo negro */
-    color: white; /* Texto blanco */
+    background-color: #181818;
+    color: white;
 }
 
 .row {
@@ -38,8 +38,12 @@
     color: white;
 }
 
-.custom-card {
+.starship-card {
     cursor: pointer;
+    height: 400px;
+    width: 200px; 
+    display: flex;
+    flex-direction: column;
 }
 
 .nombre {

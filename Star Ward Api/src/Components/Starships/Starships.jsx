@@ -33,7 +33,7 @@ function Starships({ searchTerm }) {
         <>
           <Row>
             {filteredStarships.slice(0, 5).map((starship, index) => (
-              <Col key={index} md={2} className="custom-card">
+              <Col key={index} md={2} className="starship-card">
                 <Card
                   style={{
                     width: "18rem",
@@ -51,9 +51,7 @@ function Starships({ searchTerm }) {
                   <Card.Body>
                     <Card.Title className="nombre">{starship.name}</Card.Title>
                     <Card.Text>
-                      Modelo: {starship.model}
-                      <br />
-                      Fabricante: {starship.manufacturer}
+                      <strong>Modelo:</strong> {starship.model}
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -62,7 +60,7 @@ function Starships({ searchTerm }) {
           </Row>
           <Row>
             {filteredStarships.slice(5, 10).map((starship, index) => (
-              <Col key={index} md={2} className="custom-card">
+              <Col key={index} md={2} className="starship-card">
                 <Card
                   style={{
                     width: "18rem",
@@ -80,9 +78,7 @@ function Starships({ searchTerm }) {
                   <Card.Body>
                     <Card.Title className="nombre">{starship.name}</Card.Title>
                     <Card.Text>
-                      Modelo: {starship.model}
-                      <br />
-                      Fabricante: {starship.manufacturer}
+                      <strong>Modelo:</strong> {starship.model}
                     </Card.Text>
                   </Card.Body>
                 </Card>
