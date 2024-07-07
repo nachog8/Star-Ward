@@ -39,7 +39,10 @@ function Header({ onSearch }) {
             alt="Logo Star Wars"
           />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle
+          aria-controls="navbarScroll"
+          className="custom-toggler"
+        />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0" navbarScroll>
             <Nav.Link
@@ -47,7 +50,7 @@ function Header({ onSearch }) {
               to="/characters"
               className="header-link"
               activeClassName="active"
-              exact // Asegura que el enlace solo esté activo en la ruta exacta
+              exact
             >
               Characters
             </Nav.Link>
@@ -74,6 +77,7 @@ function Header({ onSearch }) {
                 position: "relative",
                 display: "flex",
                 alignItems: "center",
+                width: "100%",
               }}
             >
               <Form.Control
@@ -83,7 +87,7 @@ function Header({ onSearch }) {
                 aria-label="Search"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                style={{ paddingLeft: "30px" }} // Ajusta según el tamaño de tu SVG
+                style={{ paddingLeft: "30px" }}
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,9 +106,6 @@ function Header({ onSearch }) {
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
               </svg>
             </div>
-            {/* <Button variant="outline-success" className="header-btn">
-              Buscar
-            </Button> */}
           </Form>
         </Navbar.Collapse>
       </Container>

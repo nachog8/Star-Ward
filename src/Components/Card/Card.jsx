@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Alert } from "react-bootstrap";
+import { Container, Card, Alert } from "react-bootstrap";
 import PaginationComponent from "../Pagination/Pagination";
 import Modal from "../Modal/Modal";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Card.css";
 
 function StarWarsCards({ characters, searchTerm }) {
@@ -30,7 +29,7 @@ function StarWarsCards({ characters, searchTerm }) {
     setCurrentPage(page);
   };
 
-  // Reset to first page when searchTerm changes
+  // Restablecer a la primera página cuando cambia el término de búsqueda
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm]);
@@ -52,73 +51,34 @@ function StarWarsCards({ characters, searchTerm }) {
         </Alert>
       ) : (
         <>
-          <Row>
-            {paginatedCharacters.slice(0, 5).map((character, index) => {
+          <div className="card-grid">
+            {paginatedCharacters.map((character, index) => {
               const characterId = getCharacterId(character.url);
               return (
-                <Col key={index} md={2} className="custom-card">
-                  <Card
-                    style={{
-                      width: "18rem",
-                      maxWidth: "100%",
-                      marginBottom: "20px",
-                    }}
-                    onClick={() => handleShowModal(character)}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={`https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`}
-                      alt={`Imagen de ${character.name}`}
-                    />
-                    <Card.Body>
-                      <Card.Title className="nombre">
-                        {character.name}
-                      </Card.Title>
-                    </Card.Body>
-                  </Card>
-                </Col>
+                <Card
+                  key={index}
+                  className="custom-card"
+                  onClick={() => handleShowModal(character)}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={`https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`}
+                    alt={`Imagen de ${character.name}`}
+                  />
+                  <Card.Body>
+                    <Card.Title className="nombre">{character.name}</Card.Title>
+                  </Card.Body>
+                </Card>
               );
             })}
-          </Row>
-          <Row>
-            {paginatedCharacters.slice(5, 10).map((character, index) => {
-              const characterId = getCharacterId(character.url);
-              return (
-                <Col key={index} md={2} className="custom-card">
-                  <Card
-                    style={{
-                      width: "18rem",
-                      maxWidth: "100%",
-                      marginBottom: "20px",
-                    }}
-                    onClick={() => handleShowModal(character)}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={`https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`}
-                      alt={`Imagen de ${character.name}`}
-                    />
-                    <Card.Body>
-                      <Card.Title className="nombre">
-                        {character.name}
-                      </Card.Title>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
+          </div>
         </>
       )}
-      <Row>
-        <Col className="d-flex justify-content-center">
-          <PaginationComponent
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredCharacters.length / itemsPerPage)}
-            onPageChange={handlePageChange}
-          />
-        </Col>
-      </Row>
+      <PaginationComponent
+        currentPage={currentPage}
+        totalPages={Math.ceil(filteredCharacters.length / itemsPerPage)}
+        onPageChange={handlePageChange}
+      />
       <Modal
         show={showModal}
         handleClose={handleCloseModal}

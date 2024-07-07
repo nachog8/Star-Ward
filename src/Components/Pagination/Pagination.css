@@ -1,41 +1,57 @@
-/* Cambia el color de fondo de todos los enlaces del paginador */
-.pagination-item .page-link {
-    background-color: #181818 !important; /* Color de fondo */
-    color: white !important; /* Color del texto */
-    border: 1px solid #e9d825 !important; /* Borde, opcional */
+@keyframes resplandor {
+  0% {
+    box-shadow: 0 0 0 0.2rem rgba(212, 193, 25, 0.75);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 193, 25, 0);
+  }
 }
 
-/* Cambia el color de fondo del enlace activo/seleccionado */
-.pagination-item.active .page-link {
-    background-color: #e9d825 !important; /* Color de fondo para el enlace activo */
-    color: black !important; /* Color del texto para el enlace activo */
+/* Cambia el color de fondo de los elementos activos y el color del borde */
+.pagination .page-item.active .page-link {
+  background-color: #d4c219;
+  border-color: #d4c219;
+  color: black;
+  border-radius: 5px;
 }
 
-.pagination-item .page-link:focus, .pagination-item .page-link:active {
-    box-shadow: 0 0 0 0.1rem rgba(233, 216, 37, 0.5) !important; /* Sombra amarilla */
-    outline: none !important;
+/* Cambia el color de texto de los elementos de paginación */
+.pagination .page-link {
+  color: black;
+}
+
+/* Opcional: Cambia el color al pasar el mouse para mantener la consistencia */
+.pagination .page-link:hover {
+  background-color: #b3a51b;
+  border-color: #b3a51b;
+  color: black;
+}
+
+/* Cambia el color de resplandor al hacer clic en los botones */
+.pagination .page-link:focus {
+  animation: resplandor 0.5s ease-out forwards;
 }
 
 /* Centra el contenedor de la paginación */
 .pagination-container {
   display: flex;
-  justify-content: center; /* Centra los elementos horizontalmente */
-  margin-top: 20px; /* Añade un margen superior, ajusta según sea necesario */
+  justify-content: center;
+  margin-top: 20px;
 }
 
-/* Asegúrate de que los elementos de paginación se muestren en línea */
+/* Estilos para la lista de paginación */
 .pagination {
   display: flex;
-  list-style: none; /* Elimina los estilos de lista predeterminados */
-  padding: 0; /* Elimina el padding predeterminado */
+  list-style: none; 
+  padding: 0;
 }
 
 .pagination-item {
-  margin: 0 5px; /* Añade un pequeño margen entre los elementos de paginación */
-  cursor: pointer; /* Cambia el cursor a pointer para indicar que es clickeable */
+  margin: 0 5px;
+  cursor: pointer;
 }
 
 /* Estilos adicionales para el elemento activo, si es necesario */
 .pagination-item.active {
-  font-weight: bold; /* Hace el número de página actual más bold */
+  font-weight: bold;
 }

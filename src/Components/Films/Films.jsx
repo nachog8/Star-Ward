@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Alert } from "react-bootstrap";
+import { Container, Card, Alert } from "react-bootstrap";
 import "./Films.css";
+
+const BASE_IMAGE_URL = "https://starwars-visualguide.com/assets/img/films/";
 
 function Films({ searchTerm }) {
   const [films, setFilms] = useState([]);
@@ -30,62 +32,26 @@ function Films({ searchTerm }) {
           No se encontraron películas con ese nombre.
         </Alert>
       ) : (
-        <>
-          <Row>
-            {filteredFilms.slice(0, 3).map((film, index) => (
-              <Col key={index} md={4} className="custom-card">
-                <Card
-                  style={{
-                    width: "18rem",
-                    maxWidth: "100%",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`}
-                    alt={`Imagen de ${film.title}`}
-                  />
-                  <Card.Body>
-                    <Card.Title className="nombre">{film.title}</Card.Title>
-                    <Card.Text>
-                      Director: {film.director}
-                      <br />
-                      Productor: {film.producer}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-          <Row>
-            {filteredFilms.slice(3, 6).map((film, index) => (
-              <Col key={index} md={4} className="custom-card">
-                <Card
-                  style={{
-                    width: "18rem",
-                    maxWidth: "100%",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`}
-                    alt={`Imagen de ${film.title}`}
-                  />
-                  <Card.Body>
-                    <Card.Title className="nombre">{film.title}</Card.Title>
-                    <Card.Text>
-                      Director: {film.director}
-                      <br />
-                      Productor: {film.producer}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </>
+        <div className="films-grid">
+          {filteredFilms.map((film, index) => (
+            <Card key={index} className="custom-card">
+              <Card.Img
+                variant="top"
+                src={`${BASE_IMAGE_URL}${film.episode_id}.jpg`}
+                alt={`Imagen de ${film.title}`}
+                className="film-img"
+              />
+              <Card.Body>
+                <Card.Title className="nombre">{film.title}</Card.Title>
+                <Card.Text>
+                  <strong>Director:</strong> {film.director}
+                  <br />
+                  <strong>Productor:</strong> {film.producer}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       )}
     </Container>
   );

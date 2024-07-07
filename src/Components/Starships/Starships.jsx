@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Alert } from "react-bootstrap";
+import { Container, Card, Alert } from "react-bootstrap";
 import "./Starships.css";
+
+const BASE_IMAGE_URL = "https://starwars-visualguide.com/assets/img/starships/";
+const DEFAULT_IMAGE_URL = "/src/assets/img/noImg.jpg"; // Ruta a la imagen por defecto
 
 function Starships({ searchTerm }) {
   const [starships, setStarships] = useState([]);
@@ -19,6 +22,9 @@ function Starships({ searchTerm }) {
     fetchStarships();
   }, []);
 
+  // Definimos los índices de las naves que deben mostrar la imagen por defecto
+  const defaultImageStarshipIndexes = [0, 1, 9];
+
   const filteredStarships = starships.filter((starship) =>
     starship.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -30,62 +36,29 @@ function Starships({ searchTerm }) {
           No se encontraron naves con ese nombre.
         </Alert>
       ) : (
-        <>
-          <Row>
-            {filteredStarships.slice(0, 5).map((starship, index) => (
-              <Col key={index} md={2} className="starship-card">
-                <Card
-                  style={{
-                    width: "18rem",
-                    maxWidth: "100%",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={`https://starwars-visualguide.com/assets/img/starships/${
-                      starship.url.match(/\/(\d+)\/$/)[1]
-                    }.jpg`}
-                    alt={`Imagen de ${starship.name}`}
-                  />
-                  <Card.Body>
-                    <Card.Title className="nombre">{starship.name}</Card.Title>
-                    <Card.Text>
-                      <strong>Modelo:</strong> {starship.model}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-          <Row>
-            {filteredStarships.slice(5, 10).map((starship, index) => (
-              <Col key={index} md={2} className="starship-card">
-                <Card
-                  style={{
-                    width: "18rem",
-                    maxWidth: "100%",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={`https://starwars-visualguide.com/assets/img/starships/${
-                      starship.url.match(/\/(\d+)\/$/)[1]
-                    }.jpg`}
-                    alt={`Imagen de ${starship.name}`}
-                  />
-                  <Card.Body>
-                    <Card.Title className="nombre">{starship.name}</Card.Title>
-                    <Card.Text>
-                      <strong>Modelo:</strong> {starship.model}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </>
+        <div className="starship-grid">
+          {filteredStarships.map((starship, index) => (
+            <Card key={index} className="starship-card">
+              <Card.Img
+                variant="top"
+                src={
+                  defaultImageStarshipIndexes.includes(index)
+                    ? DEFAULT_IMAGE_URL
+                    : `${BASE_IMAGE_URL}${
+                        starship.url.match(/\/(\d+)\/$/)[1]
+                      }.jpg`
+                }
+                alt={`Imagen de ${starship.name}`}
+              />
+              <Card.Body>
+                <Card.Title className="nombre">{starship.name}</Card.Title>
+                <Card.Text>
+                  <strong>Modelo:</strong> {starship.model}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       )}
     </Container>
   );
