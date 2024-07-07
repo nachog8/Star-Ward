@@ -47,8 +47,11 @@ function App() {
               <StarWarsCards characters={characters} searchTerm={searchTerm} />
             }
           />
-          <Route path="/starships" element={<Starships />} />
-          <Route path="/films" element={<Films />} />
+          <Route
+            path="/starships"
+            element={<Starships searchTerm={searchTerm} />}
+          />
+          <Route path="/films" element={<Films searchTerm={searchTerm} />} />
         </Routes>
         <Footer />
       </div>

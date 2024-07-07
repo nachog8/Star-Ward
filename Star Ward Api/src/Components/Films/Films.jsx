@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Films.css";
 
-function Films() {
+function Films({ searchTerm }) {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
@@ -20,17 +19,21 @@ function Films() {
     fetchFilms();
   }, []);
 
+  const filteredFilms = films.filter((film) =>
+    film.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Container>
-      {films.length === 0 ? (
+      {filteredFilms.length === 0 ? (
         <Alert variant="danger" className="mt-4 error">
-          No se encontraron películas.
+          No se encontraron películas con ese nombre.
         </Alert>
       ) : (
         <>
           <Row>
-            {films.slice(0, 3).map((film, index) => (
-              <Col key={index} md={4} className="custom-film">
+            {filteredFilms.slice(0, 3).map((film, index) => (
+              <Col key={index} md={4} className="custom-card">
                 <Card
                   style={{
                     width: "18rem",
@@ -40,10 +43,7 @@ function Films() {
                 >
                   <Card.Img
                     variant="top"
-                    className="film-img"
-                    src={`https://starwars-visualguide.com/assets/img/films/${
-                      film.url.match(/\/([0-9]*)\/$/)[1]
-                    }.jpg`}
+                    src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`}
                     alt={`Imagen de ${film.title}`}
                   />
                   <Card.Body>
@@ -59,8 +59,8 @@ function Films() {
             ))}
           </Row>
           <Row>
-            {films.slice(3, 6).map((film, index) => (
-              <Col key={index} md={4} className="custom-film">
+            {filteredFilms.slice(3, 6).map((film, index) => (
+              <Col key={index} md={4} className="custom-card">
                 <Card
                   style={{
                     width: "18rem",
@@ -70,10 +70,7 @@ function Films() {
                 >
                   <Card.Img
                     variant="top"
-                    className="film-img"
-                    src={`https://starwars-visualguide.com/assets/img/films/${
-                      film.url.match(/\/([0-9]*)\/$/)[1]
-                    }.jpg`}
+                    src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`}
                     alt={`Imagen de ${film.title}`}
                   />
                   <Card.Body>

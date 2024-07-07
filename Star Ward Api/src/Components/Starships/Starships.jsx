@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Starships.css";
 
-function Starships() {
+function Starships({ searchTerm }) {
   const [starships, setStarships] = useState([]);
 
   useEffect(() => {
     const fetchStarships = async () => {
       try {
-        const response = await fetch(`https://swapi.dev/api/starships/`);
+        const response = await fetch("https://swapi.dev/api/starships/");
         const data = await response.json();
         setStarships(data.results);
       } catch (error) {
-        console.error("Error al obtener las naves espaciales", error);
+        console.error("Error al obtener las naves", error);
       }
     };
 
     fetchStarships();
   }, []);
 
+  const filteredStarships = starships.filter((starship) =>
+    starship.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Container>
-      {starships.length === 0 ? (
+      {filteredStarships.length === 0 ? (
         <Alert variant="danger" className="mt-4 error">
-          No se encontraron naves espaciales.
+          No se encontraron naves con ese nombre.
         </Alert>
       ) : (
         <>
           <Row>
-            {starships.slice(0, 5).map((starship, index) => (
+            {filteredStarships.slice(0, 5).map((starship, index) => (
               <Col key={index} md={2} className="custom-card">
                 <Card
                   style={{
@@ -41,20 +44,24 @@ function Starships() {
                   <Card.Img
                     variant="top"
                     src={`https://starwars-visualguide.com/assets/img/starships/${
-                      starship.url.match(/\/([0-9]*)\/$/)[1]
+                      starship.url.match(/\/(\d+)\/$/)[1]
                     }.jpg`}
                     alt={`Imagen de ${starship.name}`}
-                    className="card-img-top"
                   />
                   <Card.Body>
                     <Card.Title className="nombre">{starship.name}</Card.Title>
+                    <Card.Text>
+                      Modelo: {starship.model}
+                      <br />
+                      Fabricante: {starship.manufacturer}
+                    </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
             ))}
           </Row>
           <Row>
-            {starships.slice(5, 10).map((starship, index) => (
+            {filteredStarships.slice(5, 10).map((starship, index) => (
               <Col key={index} md={2} className="custom-card">
                 <Card
                   style={{
@@ -66,13 +73,17 @@ function Starships() {
                   <Card.Img
                     variant="top"
                     src={`https://starwars-visualguide.com/assets/img/starships/${
-                      starship.url.match(/\/([0-9]*)\/$/)[1]
+                      starship.url.match(/\/(\d+)\/$/)[1]
                     }.jpg`}
                     alt={`Imagen de ${starship.name}`}
-                    className="card-img-top"
                   />
                   <Card.Body>
                     <Card.Title className="nombre">{starship.name}</Card.Title>
+                    <Card.Text>
+                      Modelo: {starship.model}
+                      <br />
+                      Fabricante: {starship.manufacturer}
+                    </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
